@@ -1,0 +1,36 @@
+﻿@using Models.Writings
+@using WritingPlatform.Helpers
+
+
+@model WritingsViewModel
+@{
+    ViewBag.Title = "Произведения";
+}
+
+<div>
+    <table class="table table-striped">
+        <tr class="info">
+            <th>Название</th>
+            <th>Жанр</th>
+            <th>Автор</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.Writings)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Genre</td>
+                <td>@item.UserId</td>
+                <td>
+                    @Html.ActionLink("Подробнее", "Id",
+              new { Controller = "Home", Id = item.Id },
+              new { @class = "btn btn-default" })
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+    <div class="btn-group">
+        @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", "Home", new { page = x }))
+    </div>
+</div>
